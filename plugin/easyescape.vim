@@ -21,7 +21,6 @@ if !exists("g:easyescape_timeout")
 endif
 
 if !s:haspy3 && g:easyescape_timeout < 2000
-    echomsg "Python3 is required when g:easyescape_timeout < 2000"
     let g:easyescape_timeout = 2000
 endif
 
@@ -71,13 +70,12 @@ function! <SID>EasyescapeMap(char)
 
     let s:current_chars = copy(g:easyescape_chars)
     
-    
-    let a:line_check = getline(".")
-    if a:line_check == "k"
+    let l:line_check_empty = getline(".")
+    if l:line_check_empty == "k"
         return s:escape_sequence
     endif
     
-    let a:trimed  = substitute(a:line_check, '^\s*\(.\{-}\)\s*$', '\1', '')
+    let a:trimed  = substitute(l:line_check_empty, '^\s*\(.\{-}\)\s*$', '\1', '')
     if a:trimed == "k"
         return repeat("\<BS>", eval(join(values(g:easyescape_chars), "+"))-1). "\<c-w>" . "\<ESC>"
     else
