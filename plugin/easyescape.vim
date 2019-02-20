@@ -75,8 +75,8 @@ function! <SID>EasyescapeMap(char)
         return s:escape_sequence
     endif
     
-    let a:trimed  = substitute(l:line_check_empty, '^\s*\(.\{-}\)\s*$', '\1', '')
-    if a:trimed == "k"
+    let l:trimed  = substitute(l:line_check_empty, '^\s*\(.\{-}\)\s*$', '\1', '')
+    if l:trimed == "k"
         return repeat("\<BS>", eval(join(values(g:easyescape_chars), "+"))-1). "\<c-w>" . "\<ESC>"
     else
         return s:escape_sequence
